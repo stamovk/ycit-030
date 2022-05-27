@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { About } from "./About"
 import { Cart } from "./Cart"
 import { Products } from "./Products"
@@ -6,12 +5,12 @@ import { Products } from "./Products"
 export function App() {
     console.log("URL", window.location.pathname)
 
-    const [_, setState] = useState(0)
-
     let theComponent
+    // let TheComponent
     switch (window.location.pathname) {
         case "/about":
             theComponent = <About />
+            // TheComponent = About
             break
         case "/products":
             theComponent = <Products />
@@ -23,19 +22,16 @@ export function App() {
             break
     }
 
-    function handleClick(e) {
-        // console.log("taco", e.target.name)
-
-        // This is a hack
-        // This purpose of this is simply to trigger <App /> to rerender
-        // setState( (currentState) => currentState ++  )
-        // setState(e)
-        // setState(new Date())
-        setState({})
-        // setState([])
-
-        window.history.replaceState(undefined, "", `/${e.target.name}`)
-    }
+    // Alternatively you could use if-if-else
+    // if (window.location.pathname === "/about") {
+    //     theComponent = <About />
+    // } else if (window.location.pathname === "/products") {
+    //     theComponent = <Products />
+    // } else if (window.location.pathname === "/cart") {
+    //     theComponent = <Cart />
+    // } else {
+    //     theComponent = <div>fail..</div>
+    // }
 
     return (
         <>
@@ -44,23 +40,18 @@ export function App() {
 
                 <ul>
                     <li>
-                        <a name="products" onClick={handleClick}>
-                            Products
-                        </a>
+                        <a href="/products">Products</a>
                     </li>
                     <li>
-                        <a name="cart" onClick={handleClick}>
-                            Cart
-                        </a>
+                        <a href="/cart">Cart</a>
                     </li>
                     <li>
-                        <a name="about" onClick={handleClick}>
-                            About
-                        </a>
+                        <a href="/about">About</a>
                     </li>
                 </ul>
             </nav>
             <div id="app-body">{theComponent}</div>
+            {/* <div id="app-body"><TheComponent /></div> */}
         </>
     )
 }
