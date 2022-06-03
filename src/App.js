@@ -1,66 +1,43 @@
-import { useState } from "react"
+import { Link, Route, Routes } from "react-router-dom"
 import { About } from "./About"
 import { Cart } from "./Cart"
+import { navbarItems } from "./navItems"
 import { Products } from "./Products"
+import { useBobsCounter } from "./useBobsCounter"
+
+// Assignment #1
+
+// Refer to https://reactrouter.com/docs/en/v6/components
+
+// Incorporate one of the following API endpoints from the doc mentioned above:
+
+// some suggestions:  Outlet, useLocation, useNavigate, useResolvedPath
 
 export function App() {
-    console.log("URL", window.location.pathname)
+    const num = useBobsCounter()
 
-    const [_, setState] = useState(0)
-
-    let theComponent
-    switch (window.location.pathname) {
-        case "/about":
-            theComponent = <About />
-            break
-        case "/products":
-            theComponent = <Products />
-            break
-        case "/cart":
-            theComponent = <Cart />
-            break
-        default:
-            break
-    }
-
-    function handleClick(e) {
-        // console.log("taco", e.target.name)
-
-        // This is a hack
-        // This purpose of this is simply to trigger <App /> to rerender
-        // setState( (currentState) => currentState ++  )
-        // setState(e)
-        // setState(new Date())
-        setState({})
-        // setState([])
-
-        window.history.replaceState(undefined, "", `/${e.target.name}`)
-    }
+    const theNavItems = navbarItems.map((el) => {
+        return (
+            <li key={el.key}>
+                <Link to={el.name}>{el.label}</Link>
+            </li>
+        )
+    })
 
     return (
         <>
             <nav>
-                <span>Tacomania</span>
-
-                <ul>
-                    <li>
-                        <a name="products" onClick={handleClick}>
-                            Products
-                        </a>
-                    </li>
-                    <li>
-                        <a name="cart" onClick={handleClick}>
-                            Cart
-                        </a>
-                    </li>
-                    <li>
-                        <a name="about" onClick={handleClick}>
-                            About
-                        </a>
-                    </li>
-                </ul>
+                <span>Tacomania {num}</span>
+                <ul>{theNavItems}</ul>
             </nav>
-            <div id="app-body">{theComponent}</div>
+            <div id="app-body">
+                <Routes>
+                    <Route path="/" element={<div>Home</div>} />
+                    <Route path="products" element={<Products />} />
+                    <Route path="about" element={<About />} />
+                    <Route path="cart" element={<Cart />} />
+                </Routes>
+            </div>
         </>
     )
 }

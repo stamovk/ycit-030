@@ -1,6 +1,7 @@
 import reactTaco from "react-dom"
 import { App } from "./App"
 // import { App as AppNoGoodReloads } from "./App-no-good-reloads"
+import { BrowserRouter } from "react-router-dom"
 
 import "./styles.css"
 
@@ -11,5 +12,10 @@ document.body.appendChild(theDiv)
 //     return <div>Hello world</div>
 // }
 
-reactTaco.render(<App />, theDiv)
+reactTaco.render(
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>,
+    theDiv
+)
 // reactTaco.render(<AppNoGoodReloads />, theDiv)
