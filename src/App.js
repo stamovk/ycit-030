@@ -1,7 +1,6 @@
 import { Link, Route, Routes } from "react-router-dom"
 import { About } from "./About"
 import { Cart } from "./Cart"
-import { MyLocation } from "./Location"
 import { navbarItems } from "./navItems"
 import { Products } from "./Products"
 import { useBobsCounter } from "./useBobsCounter"
@@ -31,15 +30,15 @@ export function App() {
                 <span>Tacomania {num}</span>
                 <ul>{theNavItems}</ul>
             </nav>
-            <div>
+            {/* <div>
                 <MyLocation />
-            </div>
+            </div> */}
             <div id="app-body">
                 <Routes>
                     <Route path="/" element={<div>Home</div>} />
-                    <Route path="products" element={<Products />} />
-                    <Route path="about" element={<About />} />
-                    <Route path="cart" element={<Cart />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/cart" element={<Cart />} />
                 </Routes>
             </div>
         </>
